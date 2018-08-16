@@ -1,2 +1,2 @@
+export * from './ScrollContainer/ScrollContainer';
 export * from './Tile/Tile';
-export * from './TileContainer/TileContainer';
