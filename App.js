@@ -1,5 +1,6 @@
 import React from 'react';
-import {Platform, View, Text} from 'react-native';
+import {Platform, View, Text, Button} from 'react-native';
+import { createStackNavigator } from 'react-navigation';
 import {styles} from './App.css';
 import {Tile, ScrollContainer} from './src/components';
 
@@ -18,16 +19,34 @@ const data = [{
   date: "08 August 2018"
 }];
 
-export default class App extends React.PureComponent {
+const HomeScreen = () =>
+  <View style={styles.container}>
+    <Text style={styles.welcome}>React Native! 5</Text>
+    <Text style={styles.instructions}>{platform}</Text>
+    <ScrollContainer items={data}>
+      <Tile />
+    </ScrollContainer>
+  </View>;
+
+const DetailsScreen = props =>
+  <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <Text>Details Screen</Text>
+    <Button
+      title="Go to Main"
+      onPress={() => props.navigation.navigate('Home')}
+    />
+  </View>;
+
+// or export default ...
+const RootStack = createStackNavigator({
+  Home: HomeScreen,
+  Details: DetailsScreen
+}, {
+  initialRouteName: 'Details'
+});
+
+export default class App extends React.Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>React Native!</Text>
-        <Text style={styles.instructions}>{platform}</Text>
-        <ScrollContainer items={data}>
-          <Tile />
-        </ScrollContainer>
-      </View>
-    );
+    return <RootStack />;
   }
 }
