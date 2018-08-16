@@ -2,20 +2,20 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    // padding: 15,
-    borderWidth: 2,
-    borderColor: 'red',
+    justifyContent: 'center',
+    marginBottom: 20
+  },
+  image: {
+    alignSelf: 'center',
   },
   title: {
-    // textAlign: 'center',
     marginTop: 10,
-    fontSize: 14,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#337ab7'
   },
   date: {
-    // textAlign: 'center',
-    fontSize: 14,
+    fontSize: 18,
     color: '#337ab7'
   }
 });

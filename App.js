@@ -24,7 +24,6 @@ export default class App extends React.PureComponent {
       <View style={styles.container}>
         <Text style={styles.welcome}>React Native!</Text>
         <Text style={styles.instructions}>{platform}</Text>
-        {/* <ScrollContainer items={data} component={Tile} /> */}
         <ScrollContainer items={data}>
           <Tile />
         </ScrollContainer>
