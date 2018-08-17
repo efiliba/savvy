@@ -17,5 +17,15 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
-  },
+  }
 });
+
+export const navigationOptions = {
+  headerStyle: {
+    backgroundColor: 'black',
+  },
+  headerTintColor: '#fff',
+  headerTitleStyle: {
+    fontWeight: 'bold',
+  },
+};

@@ -1,52 +1,54 @@
 import React from 'react';
 import {Platform, View, Text, Button} from 'react-native';
-import { createStackNavigator } from 'react-navigation';
-import {styles} from './App.css';
-import {Tile, ScrollContainer} from './src/components';
+import {createStackNavigator} from 'react-navigation';
+import {styles, navigationOptions} from './App.css';
+import {SelectableItems, Tile, Details, Heading} from './src/components';
 
 const platform = Platform.select({
-  ios: 'IOS Specific code,\n' + 'and a new line',
-  android: 'Android code'
+  ios: 'Running on IOS',
+  android: 'Running on Android'
 });
 
 const data = [{
-  img: require("./src/img/image1.png"),
+  img: require("./src/img/image1.jpeg"),
   title: "Credit score 101 for uni students",
   date: "14 August 2018"
 }, {
-  img: require("./src/img/image1.jpg"),
+  img: require("./src/img/image2.png"),
   title: "Not so obvious reasons to monitor your credit score",
   date: "08 August 2018"
+}, {
+  img: require("./src/img/image3.jpeg"),
+  title: "What are Bad Credit Car Loans?",
+  date: "19 July 2018"
+}, {
+  img: require("./src/img/image4.png"),
+  title: "What you should know about mobile phone plans",
+  date: "13 July 2018"
 }];
 
-const HomeScreen = () =>
+const handleNavigateTo = navigation => item => {
+  navigation.navigate('Details', {item});
+};
+
+const HomeScreen = ({navigation}) =>
   <View style={styles.container}>
-    <Text style={styles.welcome}>React Native! 5</Text>
+    <Text style={styles.welcome}>React Native! 4</Text>
     <Text style={styles.instructions}>{platform}</Text>
-    <ScrollContainer items={data}>
+    <SelectableItems items={data} onItemSelected={handleNavigateTo(navigation)} Heading={Heading}>
       <Tile />
-    </ScrollContainer>
+    </SelectableItems>
   </View>;
 
-const DetailsScreen = props =>
-  <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-    <Text>Details Screen</Text>
-    <Button
-      title="Go to Main"
-      onPress={() => props.navigation.navigate('Home')}
-    />
-  </View>;
-
-// or export default ...
-const RootStack = createStackNavigator({
-  Home: HomeScreen,
-  Details: DetailsScreen
-}, {
-  initialRouteName: 'Details'
+HomeScreen.navigationOptions = ({navigation}) => ({
+  title: 'Home',
+  // title: navigation.getParam('otherParam', 'A Nested Details Screen'),
 });
 
-export default class App extends React.Component {
-  render() {
-    return <RootStack />;
-  }
-}
+export default createStackNavigator({
+  Home: HomeScreen,
+  Details
+}, {
+  initialRouteName: 'Home',
+  navigationOptions
+});
